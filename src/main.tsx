@@ -17,6 +17,9 @@ render(
     <RevealJS
         plugins={[Highlight, Zoom, Notes, Search, Markdown]}
         theme="black"
+        showSlideNumber='all'
+        slideNumber="h.v"
+        hash
     >
         <App />
     </RevealJS>,

@@ -39,6 +39,16 @@ interface CodeSlideProps {
 
     /** A component to render at the bottom of code, such as footer */
     bottomComponent?: HTMLElement | JSX.Element;
+
+    /**This will find and highlight code inside of `<pre><code>` tags; it tries to detect the language automatically. If automatic detection doesn’t work for you, or you simply prefer to be explicit, you can specify the language manually in the using the class attribute: `html`, `js` or `java` etc*/
+    syntax?: string;
+
+    /**syntax highlight color scheme
+     * list can be found at [HighlightJS github](https://github.com/highlightjs/highlight.js/tree/main/src/styles)
+     * - It can be a name of a color scheme.
+     * - If a colorscheme is listed insde "base16" directory, name shoule be prefixed with "base16". For example "base16/dracula"
+     */
+    syntaxHighlightColors?: string;
 }
 
 export const CodeSlide = ({
@@ -49,8 +59,10 @@ export const CodeSlide = ({
     startLineNumbersFrom = undefined,
     hasTags = false,
     codeAnimationID = undefined,
-    topComponent,
-    bottomComponent,
+    topComponent = undefined,
+    bottomComponent = undefined,
+    syntax = undefined,
+    syntaxHighlightColors = "default",
     ref
 }: CodeSlideProps) => {
 
@@ -60,7 +72,9 @@ export const CodeSlide = ({
 
     return (
         <>
-            <link rel="stylesheet" href="/reveal.js/plugin/highlight/monokai.css" />
+            {/* <link rel="stylesheet" href="/reveal.js/plugin/highlight/monokai.css" /> */}
+            <link rel="stylesheet"
+                href={`//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/${syntaxHighlightColors}.min.css`} />
             <section
                 data-auto-animate={codeAnimationID ? true : undefined}
                 ref={ref}
@@ -70,6 +84,7 @@ export const CodeSlide = ({
                     data-id={codeAnimationID}
                 >
                     <code
+                        className={syntax ? `language-${syntax}` : undefined}
                         data-trim={trimLeadingSpaces}
                         data-noescape={preserveHTML}
                         data-line-numbers={showLineNumbers}
