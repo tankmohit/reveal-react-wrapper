@@ -1,10 +1,10 @@
-# React wrapper created for Reveal.js library
+## React wrapper created for Reveal.js library
 
-## Inspired by [reavealjs-react](https://github.com/blakeanedved/revealjs-react).
+- Inspired by [reavealjs-react](https://github.com/blakeanedved/revealjs-react).
 
 ---
 
-# About Reveal.js
+## About Reveal.js
 
 <p align="center">
   <a href="https://revealjs.com">
